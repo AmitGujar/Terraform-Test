@@ -4,9 +4,14 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+*.tfvars
+*.tfvars.*
 
 # Crash log files
 crash.log
+
+# azure generetaed yaml files for connection
+azurek8s
 
 # Ignore any .tfvars files that are generated automatically for each Terraform run. Most
 # .tfvars files are managed as part of configuration and so should be included in
