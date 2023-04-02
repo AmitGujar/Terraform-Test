@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-  default = "azurehub"
+  default = "k8s-demo-rg"
 }
 
 variable "resource_group_location" {
@@ -25,11 +25,11 @@ variable "aks_service_principal_client_secret" {
 }
 
 variable "cluster_name" {
-  default = "k8stest"
+  default = "myCluster"
 }
 
 variable "dns_prefix" {
-  default = "k8stest"
+  default = "myCluster"
 }
 
 variable "ssh_public_key" {

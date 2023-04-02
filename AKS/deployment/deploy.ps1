@@ -1,6 +1,6 @@
 Write-Output "Deployment is started....!!!"
 
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 3
 
 kubectl apply -f deployment.yaml
 
@@ -14,9 +14,9 @@ kubectl get pods -o wide
 
 Write-Output "Exposing the deployment using nodeport...!!!"
 
-Start-Sleep -Seconds 3
+Start-Sleep -Seconds 7
 
-kubectl expose deployment demopods-deployment --type=NodePort --name=expose-service
+kubectl expose deployment demopods-deployment --type=LoadBalancer --port=80 --name=expose-service
 
 Write-Output "Listing the service"
 
