@@ -12,7 +12,7 @@ Write-Output "Listing the number of pods created by deployment"
 
 kubectl get pods -o wide
 
-Write-Output "Exposing the deployment using nodeport...!!!"
+Write-Output "Exposing the deployment...!!!"
 
 Start-Sleep -Seconds 7
 

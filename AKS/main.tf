@@ -13,12 +13,12 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   default_node_pool {
-    name       = "workernodes"
+    name       = "workernode"
     vm_size    = "Standard_D2_v2"
     node_count = var.agent_count
   }
   linux_profile {
-    admin_username = "ubuntu"
+    admin_username = "amitgujar"
 
     ssh_key {
       key_data = file(var.ssh_public_key)

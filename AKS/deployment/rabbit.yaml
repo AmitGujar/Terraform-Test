@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deployment
+spec:
+  selector:
+    matchLabels:
+      app: rabbitmq-cluster-operator
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: rabbitmq-cluster-operator
+    spec:
+      containers:
+        - name: rabbitmq-cluster-operator
+          image: docker.io/bitnami/rabbitmq-cluster-operator:2.2.0-scratch-r3
+          ports:
+            - containerPort: 9782
+      nodeSelector:
+        Type: rabbitmq

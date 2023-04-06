@@ -1,0 +1,140 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    meta.helm.sh/release-name: my-release
+    meta.helm.sh/release-namespace: default
+  creationTimestamp: "2023-04-06T06:45:24Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/component: rabbitmq-operator
+    app.kubernetes.io/instance: my-release
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    app.kubernetes.io/part-of: rabbitmq
+    helm.sh/chart: rabbitmq-cluster-operator-3.2.10
+  name: my-release-rabbitmq-cluster-operator
+  namespace: default
+  resourceVersion: "16679"
+  uid: f29df316-ea61-45e0-b4d0-0ccfb035cdbe
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: rabbitmq-operator
+      app.kubernetes.io/instance: my-release
+      app.kubernetes.io/name: rabbitmq-cluster-operator
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/component: rabbitmq-operator
+        app.kubernetes.io/instance: my-release
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: rabbitmq-cluster-operator
+        app.kubernetes.io/part-of: rabbitmq
+        helm.sh/chart: rabbitmq-cluster-operator-3.2.10
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/component: rabbitmq-operator
+                    app.kubernetes.io/instance: my-release
+                    app.kubernetes.io/name: rabbitmq-cluster-operator
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+      containers:
+        - args:
+            - --metrics-bind-address=:9782
+          command:
+            - /manager
+          env:
+            - name: OPERATOR_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: DEFAULT_RABBITMQ_IMAGE
+              value: docker.io/bitnami/rabbitmq:3.11.11-debian-11-r2
+            - name: DEFAULT_USER_UPDATER_IMAGE
+              value: docker.io/bitnami/rmq-default-credential-updater:1.0.2-scratch-r19
+          image: docker.io/bitnami/rabbitmq-cluster-operator:2.2.0-scratch-r3
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /metrics
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: rabbitmq-cluster-operator
+          ports:
+            - containerPort: 9782
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /metrics
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources: {}
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1001
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1001
+      serviceAccount: my-release-rabbitmq-cluster-operator
+      serviceAccountName: my-release-rabbitmq-cluster-operator
+      terminationGracePeriodSeconds: 30
+      nodeSelector:
+        Type: rabbitmq
+status:
+  availableReplicas: 1
+  conditions:
+    - lastTransitionTime: "2023-04-06T06:45:54Z"
+      lastUpdateTime: "2023-04-06T06:45:54Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-04-06T06:45:24Z"
+      lastUpdateTime: "2023-04-06T06:45:54Z"
+      message:
+        ReplicaSet "my-release-rabbitmq-cluster-operator-6d9fdfd5" has successfully
+        progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
