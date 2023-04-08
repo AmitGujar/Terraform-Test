@@ -14,9 +14,6 @@ crash.log
 azurek8s
 
 # Ignore any .tfvars files that are generated automatically for each Terraform run. Most
-# .tfvars files are managed as part of configuration and so should be included in
-# version control.
-#
 # example.tfvars
 
 # Ignore override files as they are usually used to override resources locally and so
@@ -32,3 +29,7 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 *tfplan*
+
+# Including ssh private key files
+*.pem
+id_rsa
