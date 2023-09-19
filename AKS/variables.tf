@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-  default = "k8s-demo-rg"
+  default = "AmitRG"
 }
 
 variable "resource_group_location" {
@@ -17,11 +17,11 @@ variable "agent_count" {
 }
 
 variable "aks_service_principal_app_id" {
-  default = "246cfd43-77c5-4c63-8f77-d6a19a3876ec"
+  default = ""
 }
 
 variable "aks_service_principal_client_secret" {
-  default = "QMI8Q~tCFMcT85QTc1Kdn7hanAEj7nBCnpq3Vc7b"
+  default = ""
 }
 
 variable "cluster_name" {
