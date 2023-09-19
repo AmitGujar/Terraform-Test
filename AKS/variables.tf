@@ -17,15 +17,15 @@ variable "agent_count" {
 }
 
 variable "aks_service_principal_app_id" {
-  default = ""
+  default = "246cfd43-77c5-4c63-8f77-d6a19a3876ec"
 }
 
 variable "aks_service_principal_client_secret" {
-  default = ""
+  default = "QMI8Q~tCFMcT85QTc1Kdn7hanAEj7nBCnpq3Vc7b"
 }
 
 variable "cluster_name" {
-  default = "myCluster"
+  default = "aks-test"
 }
 
 variable "dns_prefix" {
