@@ -3,6 +3,7 @@
 remove_config() {
     if [ -f ~/.kube/config ]; then
         rm ~/.kube/config
+        echo "Exiting config file is removed."
     else
         echo "No config file found"
     fi
@@ -18,4 +19,3 @@ get_values() {
     az aks get-credentials --resource-group $resource_group_name --name $aks_cluster_name
 }
 get_values
-
